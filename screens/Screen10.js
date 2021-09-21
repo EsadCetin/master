@@ -7,6 +7,9 @@ import { TouchableOpacity } from "react-native-gesture-handler";
 import { db, auth } from "../firebase";
 
 export default function Screen10({ navigation }) {
+	const [name, setName] = useState("");
+	const [about, setAbout] = useState("");
+	const [image, setImage] = useState();
 	const getProduct = async () => {
 		await db
 			.collection("products")
@@ -28,9 +31,6 @@ export default function Screen10({ navigation }) {
 	};
 	getProduct();
 
-	const [name, setName] = useState("");
-	const [about, setAbout] = useState("");
-	const [image, setImage] = useState("productPhotoUrl");
 	useEffect(() => {
 		(async () => {
 			if (Platform.OS !== "web") {
@@ -75,13 +75,11 @@ export default function Screen10({ navigation }) {
 			<TextInput
 				style={styles.TextInput2}
 				placeholder={name}
-				value={name}
 				onChangeText={(text) => setName(text)}
 			></TextInput>
 			<TextInput
 				style={styles.TextInput2}
 				placeholder={about}
-				value={about}
 				onChangeText={(text) => setAbout(text)}
 			></TextInput>
 

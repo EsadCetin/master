@@ -4,10 +4,6 @@ import { auth, db } from "../firebase";
 import styles from "./styles";
 
 const Screen8 = ({ navigation }) => {
-	const [name, setName] = useState("");
-	const [image, setImage] = useState();
-	const [about, setAbout] = useState("");
-
 	const deleteProduct = async () => {
 		await db.collection("products").doc(auth?.currentUser?.uid).delete();
 		navigation.navigate("Ninth Screen");
@@ -32,6 +28,9 @@ const Screen8 = ({ navigation }) => {
 			});
 	};
 	getProduct();
+	const [name, setName] = useState("");
+	const [image, setImage] = useState();
+	const [about, setAbout] = useState("");
 	return (
 		<View style={styles.Screen}>
 			<View style={styles.ProductButtons}>
