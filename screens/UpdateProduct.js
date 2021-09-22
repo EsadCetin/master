@@ -17,7 +17,7 @@ export default function Screen10({ navigation }) {
 	const getProduct = async () => {
 		await db
 			.collection("products")
-			.doc(auth?.currentUser?.uid)
+			.doc()
 			.get()
 			.then(function (doc) {
 				if (doc.exists) {
@@ -57,7 +57,7 @@ export default function Screen10({ navigation }) {
 	const updateProduct = async () => {
 		await db
 			.collection("products")
-			.doc(auth?.currentUser?.uid)
+			.doc()
 			.set({
 				productName: name2,
 				productAbout: about2,

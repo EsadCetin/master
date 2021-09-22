@@ -5,7 +5,6 @@ import styles from "./styles";
 
 function Screen6({ navigation }) {
 	const [image, setImage] = useState();
-	const [mail, setMail] = useState("");
 	const [sellerName, setSellerName] = useState("");
 	const getUserImage = async () => {
 		await db
@@ -15,7 +14,6 @@ function Screen6({ navigation }) {
 			.then(function (doc) {
 				if (doc.exists) {
 					setImage(doc.get("userPhotoUrl"));
-					setMail(doc.get("userEmail"));
 					setSellerName(doc.get("userName"));
 				}
 			});

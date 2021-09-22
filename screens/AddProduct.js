@@ -39,7 +39,7 @@ export default function Screen7({ navigation }) {
 	const createProduct = async () => {
 		await db
 			.collection("products")
-			.doc(auth?.currentUser?.uid)
+			.doc()
 			.set({
 				productName: name,
 				productAbout: about,

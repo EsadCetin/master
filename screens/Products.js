@@ -11,18 +11,19 @@ export default function Screen11({ navigation }) {
 	const [sellerName, setSellerName] = useState("");
 	const [price, setPrice] = useState("");
 	const [loading, setLoading] = useState(true);
-	const [users, setUsers] = useState([]);
+	const [products, setProducts] = useState([]);
+
 	useEffect(() => {
-		const subscriber = db.collection("users").onSnapshot((querySnapshot) => {
-			const users = [];
+		const subscriber = db.collection("products").onSnapshot((querySnapshot) => {
+			const products = [];
 
 			querySnapshot.forEach((documentSnapshot) => {
-				users.push({
+				products.push({
 					...documentSnapshot.data(),
 					key: documentSnapshot.id,
 				});
 			});
-			setUsers(users);
+			setProducts(products);
 			setLoading(false);
 		});
 
@@ -32,37 +33,28 @@ export default function Screen11({ navigation }) {
 	if (loading) {
 		return <ActivityIndicator />;
 	}
-	const getProduct = async () => {
-		await db
-			.collection("products")
-			.doc(auth?.currentUser?.uid)
-			.get()
-			.then(function (doc) {
-				if (doc.exists) {
-					setName(doc.get("productName"));
-					setImage(doc.get("productPhotoUrl"));
-					setPrice(doc.get("productPrice"));
-				}
-			});
-	};
-	const getSeller = async () => {
-		await db
-			.collection("users")
-			.doc(auth?.currentUser?.uid)
-			.get()
-			.then(function (doc) {
-				if (doc.exists) {
-					setSellerName(doc.get("userName"));
-				}
-			});
-	};
-	getSeller();
-	getProduct();
+	async function getProduct(db) {
+		const snapshot = await db.collection("products").get();
+		snapshot.forEach((doc) => {
+			setName(doc.get("productName"));
+			setImage(doc.get("productPhotoUrl"));
+			setPrice(doc.get("productPrice"));
+		});
+	}
+
+	async function getSeller(db) {
+		const snapshot = await db.collection("users").get();
+		snapshot.forEach((doc) => {
+			setSellerName(doc.get("sellerName"));
+		});
+	}
+	getSeller(db);
+	getProduct(db);
 	return (
 		<FlatList
 			style={styles.Screen}
-			data={users}
-			renderItem={({}) => (
+			data={products}
+			renderItem={({ product }) => (
 				<View>
 					<TouchableOpacity
 						onPress={() => navigation.navigate("Eighth Screen")}
@@ -72,7 +64,6 @@ export default function Screen11({ navigation }) {
 								style={styles.ProductPhoto}
 								source={{ uri: image }}
 							></Image>
-
 							<View>
 								<Text style={styles.ProductInfo}>{name}</Text>
 								<Text style={styles.ProductSeller}>{sellerName}</Text>

@@ -34,7 +34,7 @@ function Screen8({ navigation }) {
 	const getProduct = async () => {
 		await db
 			.collection("products")
-			.doc(auth?.currentUser?.uid)
+			.doc()
 			.get()
 			.then(function (doc) {
 				if (doc.exists) {
