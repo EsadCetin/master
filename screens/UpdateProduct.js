@@ -81,44 +81,43 @@ export default function Screen10({ navigation }) {
 	};
 
 	return (
-		<View style={styles.Screen}>
-			<SafeAreaView>
-				<ScrollView
-					refreshControl={
-						<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
-					}
-				/>
-			</SafeAreaView>
-			<View style={{ marginTop: "10%" }}></View>
-			<TextInput
-				style={styles.TextInput2}
-				placeholder={name}
-				onChangeText={(text2) => setName2(text2)}
-			></TextInput>
-			<TextInput
-				style={styles.TextInput2}
-				placeholder={about}
-				onChangeText={(text2) => setAbout2(text2)}
-			></TextInput>
+		<SafeAreaView>
+			<ScrollView>
+				refreshControl=
+				{<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}
+				<View style={{ marginTop: "10%" }}></View>
+				<TextInput
+					style={styles.TextInput2}
+					placeholder={name}
+					onChangeText={(text2) => setName2(text2)}
+				></TextInput>
+				<TextInput
+					style={styles.TextInput2}
+					placeholder={about}
+					onChangeText={(text2) => setAbout2(text2)}
+				></TextInput>
+				<View
+					style={{
+						alignItems: "center",
+					}}
+				>
+					<TouchableOpacity onPress={pickImage} style={styles.AddPhotoButton}>
+						<Text style={styles.Add}>Görsel Seç</Text>
+					</TouchableOpacity>
 
-			<View
-				style={{
-					alignItems: "center",
-				}}
-			>
-				<TouchableOpacity onPress={pickImage} style={styles.AddPhotoButton}>
-					<Text style={styles.Add}>Görsel Seç</Text>
-				</TouchableOpacity>
+					<Image
+						source={{ uri: image }}
+						style={{ width: "50%", height: "40%", marginTop: "5%" }}
+					/>
 
-				<Image
-					source={{ uri: image }}
-					style={{ width: "50%", height: "40%", marginTop: "5%" }}
-				/>
-
-				<TouchableOpacity style={styles.AddPhotoButton} onPress={updateProduct}>
-					<Text style={styles.Add}>Ürünü Güncelle</Text>
-				</TouchableOpacity>
-			</View>
-		</View>
+					<TouchableOpacity
+						style={styles.AddPhotoButton}
+						onPress={updateProduct}
+					>
+						<Text style={styles.Add}>Ürünü Güncelle</Text>
+					</TouchableOpacity>
+				</View>
+			</ScrollView>
+		</SafeAreaView>
 	);
 }
