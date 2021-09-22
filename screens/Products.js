@@ -20,7 +20,6 @@ export default function Screen11() {
 					setName(doc.get("productName"));
 					setImage(doc.get("productPhotoUrl"));
 					setAbout(doc.get("productAbout"));
-					setSellerName(doc.get("userSellerName"));
 				}
 			});
 	};
@@ -31,7 +30,7 @@ export default function Screen11() {
 			.get()
 			.then(function (doc) {
 				if (doc.exists) {
-					setSellerName(doc.get("userSellerName"));
+					setSellerName(doc.get("userName"));
 				}
 			});
 	};
@@ -39,12 +38,14 @@ export default function Screen11() {
 	getProduct();
 	return (
 		<View style={styles.Screen}>
-			<View style={{ backgroundColor: "red" }}>
+			<View>
 				<TouchableOpacity>
-					<Image></Image>
-					<Text>{name}</Text>
-					<Text>{about}</Text>
-					<Text>{sellerName}</Text>
+					<View style={styles.Product}>
+						<Image style={styles.ProductPhoto} source={{ uri: image }}></Image>
+						<Text>{name}</Text>
+						<Text>{about}</Text>
+						<Text>{sellerName}</Text>
+					</View>
 				</TouchableOpacity>
 			</View>
 		</View>

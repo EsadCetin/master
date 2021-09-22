@@ -1,5 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { Image, ImageBackground, RefreshControl } from "react-native";
+import {
+	Image,
+	ImageBackground,
+	RefreshControl,
+	SafeAreaView,
+	ScrollView,
+} from "react-native";
 import { View, Text, TextInput } from "react-native";
 import styles from "./styles";
 import * as ImagePicker from "expo-image-picker";
@@ -13,6 +19,12 @@ export default function Screen10({ navigation }) {
 	const [image2, setImage2] = useState();
 	const [name2, setName2] = useState("");
 	const [about2, setAbout2] = useState("");
+	const [refreshing, setRefreshing] = React.useState(false);
+
+	const onRefresh = React.useCallback(() => {
+		setRefreshing(true);
+		wait(2000).then(() => setRefreshing(false));
+	}, []);
 
 	const getProduct = async () => {
 		await db
@@ -70,6 +82,13 @@ export default function Screen10({ navigation }) {
 
 	return (
 		<View style={styles.Screen}>
+			<SafeAreaView>
+				<ScrollView
+					refreshControl={
+						<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+					}
+				/>
+			</SafeAreaView>
 			<View style={{ marginTop: "10%" }}></View>
 			<TextInput
 				style={styles.TextInput2}

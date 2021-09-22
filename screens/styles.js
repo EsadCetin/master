@@ -270,4 +270,17 @@ export default StyleSheet.create({
 		width: "50%",
 		marginTop: "10%",
 	},
+	Product: {
+		backgroundColor: "red",
+		flexDirection: "row",
+		width: "80%",
+		height: "55%",
+		alignSelf: "center",
+		marginTop: "10%",
+	},
+	ProductPhoto: {
+		marginTop: "8%",
+		aspectRatio: 5,
+		alignSelf: "center",
+	},
 });
