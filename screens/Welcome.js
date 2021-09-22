@@ -6,7 +6,7 @@ import styles from "./styles";
 function Screen6({ navigation }) {
 	const [image, setImage] = useState();
 	const [mail, setMail] = useState("");
-
+	const [sellerName, setSellerName] = useState("");
 	const getUserImage = async () => {
 		await db
 			.collection("users")
@@ -16,6 +16,7 @@ function Screen6({ navigation }) {
 				if (doc.exists) {
 					setImage(doc.get("userPhotoUrl"));
 					setMail(doc.get("userEmail"));
+					setSellerName(doc.get("userName"));
 				}
 			});
 	};
@@ -30,7 +31,7 @@ function Screen6({ navigation }) {
 			/>
 
 			<Text style={styles.Success}>Hoşgeldiniz </Text>
-			<Text style={styles.Success}>{mail}</Text>
+			<Text style={styles.Success}>{sellerName}</Text>
 			<Text style={styles.Success}>Kayıt Başarılı!</Text>
 			<TouchableOpacity
 				style={styles.AddProduct}

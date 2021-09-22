@@ -1,7 +1,7 @@
 import React from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import SignUpScreen from "./screens/SignUpScreen";
+import SignUpScreen from "./screens/Home";
 import AppLoading from "expo-app-loading";
 import {
 	useFonts,
@@ -10,15 +10,16 @@ import {
 	Poppins_400Regular,
 	Moul_400Regular,
 } from "@expo-google-fonts/dev";
-import Screen2 from "./screens/Screen2";
-import Screen3 from "./screens/Screen3";
-import Screen4 from "./screens/Screen4";
-import Screen5 from "./screens/Screen5";
-import Screen6 from "./screens/Screen6";
-import Screen7 from "./screens/Screen7";
-import Screen8 from "./screens/Screen8";
-import Screen9 from "./screens/Screen9";
-import Screen10 from "./screens/Screen10";
+import Screen2 from "./screens/ItemList";
+import Screen3 from "./screens/LockButton";
+import Screen4 from "./screens/InputToText";
+import Screen5 from "./screens/SignUp";
+import Screen6 from "./screens/Welcome";
+import Screen7 from "./screens/AddProduct";
+import Screen8 from "./screens/ShowProduct";
+import Screen9 from "./screens/Deleted";
+import Screen10 from "./screens/UpdateProduct";
+import Screen11 from "./screens/Products";
 
 const Stack = createNativeStackNavigator();
 export default function App() {
@@ -84,6 +85,11 @@ export default function App() {
 						name="Tenth Screen"
 						options={{ headerShown: false }}
 						component={Screen10}
+					/>
+					<Stack.Screen
+						options={{ headerTitleAlign: "center" }}
+						name="Esadke"
+						component={Screen11}
 					/>
 				</Stack.Navigator>
 			</NavigationContainer>

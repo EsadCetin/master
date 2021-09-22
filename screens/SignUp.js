@@ -8,6 +8,7 @@ function Screen5({ navigation }) {
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
 	const [photoUrl, setPhotoUrl] = useState();
+	const [sellerName, setSellerName] = useState("");
 
 	const createUser = async () => {
 		await db
@@ -16,6 +17,7 @@ function Screen5({ navigation }) {
 			.set({
 				userEmail: email,
 				userPhotoUrl: photoUrl,
+				userName: sellerName,
 			})
 			.catch((error) => alert(error));
 		navigation.navigate("Sixth Screen");
@@ -51,6 +53,12 @@ function Screen5({ navigation }) {
 				value={password}
 				onChangeText={(text) => setPassword(text)}
 				secureTextEntry={true}
+			></TextInput>
+			<TextInput
+				style={styles.TextInput}
+				placeholder={"Satıcı Adı"}
+				value={sellerName}
+				onChangeText={(text) => setSellerName(text)}
 			></TextInput>
 			<TextInput
 				style={styles.TextInput}

@@ -9,6 +9,7 @@ import { db, auth } from "../firebase";
 export default function Screen10({ navigation }) {
 	const [name, setName] = useState("");
 	const [about, setAbout] = useState("");
+	const [image, setImage] = useState();
 	const [image2, setImage2] = useState();
 	const [name2, setName2] = useState("");
 	const [about2, setAbout2] = useState("");
@@ -27,7 +28,7 @@ export default function Screen10({ navigation }) {
 			});
 	};
 	getProduct();
-	const [image, setImage] = useState();
+
 	useEffect(() => {
 		(async () => {
 			if (Platform.OS !== "web") {

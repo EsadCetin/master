@@ -73,6 +73,12 @@ function Screen8({ navigation }) {
 				}}
 			/>
 			<Text style={styles.ProductName}>{about}</Text>
+			<TouchableOpacity
+				style={styles.UpdateButton}
+				onPress={() => navigation.push("Esadke")}
+			>
+				<Text style={styles.Update}>Ürünler</Text>
+			</TouchableOpacity>
 		</View>
 	);
 }
