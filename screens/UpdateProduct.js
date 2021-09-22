@@ -1,11 +1,5 @@
 import React, { useEffect, useState } from "react";
-import {
-	Image,
-	ImageBackground,
-	RefreshControl,
-	SafeAreaView,
-	ScrollView,
-} from "react-native";
+import { Image, ImageBackground, RefreshControl } from "react-native";
 import { View, Text, TextInput } from "react-native";
 import styles from "./styles";
 import * as ImagePicker from "expo-image-picker";
@@ -19,12 +13,6 @@ export default function Screen10({ navigation }) {
 	const [image2, setImage2] = useState();
 	const [name2, setName2] = useState("");
 	const [about2, setAbout2] = useState("");
-	const [refreshing, setRefreshing] = React.useState(false);
-
-	const onRefresh = React.useCallback(() => {
-		setRefreshing(true);
-		wait(2000).then(() => setRefreshing(false));
-	}, []);
 
 	const getProduct = async () => {
 		await db
@@ -81,43 +69,37 @@ export default function Screen10({ navigation }) {
 	};
 
 	return (
-		<SafeAreaView>
-			<ScrollView>
-				refreshControl=
-				{<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}
-				<View style={{ marginTop: "10%" }}></View>
-				<TextInput
-					style={styles.TextInput2}
-					placeholder={name}
-					onChangeText={(text2) => setName2(text2)}
-				></TextInput>
-				<TextInput
-					style={styles.TextInput2}
-					placeholder={about}
-					onChangeText={(text2) => setAbout2(text2)}
-				></TextInput>
-				<View
-					style={{
-						alignItems: "center",
-					}}
-				>
-					<TouchableOpacity onPress={pickImage} style={styles.AddPhotoButton}>
-						<Text style={styles.Add}>Görsel Seç</Text>
-					</TouchableOpacity>
+		<View style={styles.Screen}>
+			<View style={{ marginTop: "10%" }}></View>
+			<TextInput
+				style={styles.TextInput2}
+				placeholder={name}
+				onChangeText={(text2) => setName2(text2)}
+			></TextInput>
+			<TextInput
+				style={styles.TextInput2}
+				placeholder={about}
+				onChangeText={(text2) => setAbout2(text2)}
+			></TextInput>
 
-					<Image
-						source={{ uri: image }}
-						style={{ width: "50%", height: "40%", marginTop: "5%" }}
-					/>
+			<View
+				style={{
+					alignItems: "center",
+				}}
+			>
+				<TouchableOpacity onPress={pickImage} style={styles.AddPhotoButton}>
+					<Text style={styles.Add}>Görsel Seç</Text>
+				</TouchableOpacity>
 
-					<TouchableOpacity
-						style={styles.AddPhotoButton}
-						onPress={updateProduct}
-					>
-						<Text style={styles.Add}>Ürünü Güncelle</Text>
-					</TouchableOpacity>
-				</View>
-			</ScrollView>
-		</SafeAreaView>
+				<Image
+					source={{ uri: image }}
+					style={{ width: "50%", height: "40%", marginTop: "5%" }}
+				/>
+
+				<TouchableOpacity style={styles.AddPhotoButton} onPress={updateProduct}>
+					<Text style={styles.Add}>Ürünü Güncelle</Text>
+				</TouchableOpacity>
+			</View>
+		</View>
 	);
 }

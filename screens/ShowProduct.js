@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { View, Text, Image, TouchableOpacity } from "react-native";
 import { auth, db } from "../firebase";
 import styles from "./styles";
@@ -30,6 +30,7 @@ function Screen8({ navigation }) {
 		sound.unloadAsync();
 		navigation.navigate("Ninth Screen");
 	};
+
 	const getProduct = async () => {
 		await db
 			.collection("products")
@@ -74,7 +75,7 @@ function Screen8({ navigation }) {
 			/>
 			<Text style={styles.ProductName}>{about}</Text>
 			<TouchableOpacity
-				style={styles.UpdateButton}
+				style={styles.ProductsButton}
 				onPress={() => navigation.push("Esadke")}
 			>
 				<Text style={styles.Update}>Ürünler</Text>

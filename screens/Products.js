@@ -1,15 +1,37 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { ActivityIndicator, FlatList } from "react-native";
 import { View, Text, Image } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { auth, db } from "../firebase";
 import styles from "./styles";
 
-export default function Screen11() {
+export default function Screen11({ navigation }) {
 	const [name, setName] = useState("");
-	const [about, setAbout] = useState("");
 	const [image, setImage] = useState();
 	const [sellerName, setSellerName] = useState("");
+	const [price, setPrice] = useState("");
+	const [loading, setLoading] = useState(true);
+	const [users, setUsers] = useState([]);
+	useEffect(() => {
+		const subscriber = db.collection("users").onSnapshot((querySnapshot) => {
+			const users = [];
 
+			querySnapshot.forEach((documentSnapshot) => {
+				users.push({
+					...documentSnapshot.data(),
+					key: documentSnapshot.id,
+				});
+			});
+			setUsers(users);
+			setLoading(false);
+		});
+
+		return () => subscriber();
+	}, []);
+
+	if (loading) {
+		return <ActivityIndicator />;
+	}
 	const getProduct = async () => {
 		await db
 			.collection("products")
@@ -19,7 +41,7 @@ export default function Screen11() {
 				if (doc.exists) {
 					setName(doc.get("productName"));
 					setImage(doc.get("productPhotoUrl"));
-					setAbout(doc.get("productAbout"));
+					setPrice(doc.get("productPrice"));
 				}
 			});
 	};
@@ -37,17 +59,29 @@ export default function Screen11() {
 	getSeller();
 	getProduct();
 	return (
-		<View style={styles.Screen}>
-			<View>
-				<TouchableOpacity>
-					<View style={styles.Product}>
-						<Image style={styles.ProductPhoto} source={{ uri: image }}></Image>
-						<Text>{name}</Text>
-						<Text>{about}</Text>
-						<Text>{sellerName}</Text>
-					</View>
-				</TouchableOpacity>
-			</View>
-		</View>
+		<FlatList
+			style={styles.Screen}
+			data={users}
+			renderItem={({}) => (
+				<View>
+					<TouchableOpacity
+						onPress={() => navigation.navigate("Eighth Screen")}
+					>
+						<View style={styles.Product}>
+							<Image
+								style={styles.ProductPhoto}
+								source={{ uri: image }}
+							></Image>
+
+							<View>
+								<Text style={styles.ProductInfo}>{name}</Text>
+								<Text style={styles.ProductSeller}>{sellerName}</Text>
+								<Text style={styles.ProductPrice}>{price}</Text>
+							</View>
+						</View>
+					</TouchableOpacity>
+				</View>
+			)}
+		/>
 	);
 }

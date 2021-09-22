@@ -10,7 +10,7 @@ export default function Screen7({ navigation }) {
 	const [name, setName] = useState("");
 	const [about, setAbout] = useState("");
 	const [image, setImage] = useState("https://i.hizliresim.com/m6abdym.jpg");
-
+	const [price, setPrice] = useState("");
 	useEffect(() => {
 		(async () => {
 			if (Platform.OS !== "web") {
@@ -45,6 +45,7 @@ export default function Screen7({ navigation }) {
 				productAbout: about,
 				productPhotoUrl: image,
 				productAdderAuthID: auth?.currentUser?.uid,
+				productPrice: price,
 			})
 			.catch((error) => alert(error));
 		navigation.navigate("Eighth Screen");
@@ -64,6 +65,12 @@ export default function Screen7({ navigation }) {
 					placeholder={"Açıklaması"}
 					value={about}
 					onChangeText={(text) => setAbout(text)}
+				></TextInput>
+				<TextInput
+					style={styles.TextInput2}
+					placeholder={"Fiyatı"}
+					value={price}
+					onChangeText={(text) => setPrice(text)}
 				></TextInput>
 			</View>
 			<View
