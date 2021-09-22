@@ -234,11 +234,12 @@ export default StyleSheet.create({
 	},
 	ProductName: {
 		textAlign: "center",
-		marginTop: "10%",
+		marginTop: "5%",
 		fontSize: 30,
 		fontFamily: "Poppins_500Medium",
 	},
 	Photo: {
+		marginTop: "8%",
 		width: "90%",
 		height: "50%",
 		alignSelf: "center",
@@ -246,7 +247,7 @@ export default StyleSheet.create({
 	ProductButtons: {
 		flexDirection: "row",
 		justifyContent: "space-between",
-		marginTop: "6%",
+		marginTop: "15%",
 		marginRight: "5%",
 		marginLeft: "5%",
 	},

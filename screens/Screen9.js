@@ -20,7 +20,7 @@ export default function Screen9({ navigation }) {
 			<Text style={styles.Success}>Ürün Silme İşlemi Başarılı</Text>
 			<TouchableOpacity
 				style={styles.BackButton}
-				onPress={() => navigation.navigate("Seventh Screen")}
+				onPress={() => navigation.push("Seventh Screen")}
 			>
 				<Text>Ürün Ekleme Ekranına Dön</Text>
 			</TouchableOpacity>

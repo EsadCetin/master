@@ -9,9 +9,7 @@ import { db, auth } from "../firebase";
 export default function Screen7({ navigation }) {
 	const [name, setName] = useState("");
 	const [about, setAbout] = useState("");
-	const [image, setImage] = useState(
-		"http://imgim.com/e21725fe-638e-4ed9-b1aa-352b6263c10b.jpg"
-	);
+	const [image, setImage] = useState("https://i.hizliresim.com/m6abdym.jpg");
 
 	useEffect(() => {
 		(async () => {
@@ -29,7 +27,7 @@ export default function Screen7({ navigation }) {
 		let result = await ImagePicker.launchImageLibraryAsync({
 			mediaTypes: ImagePicker.MediaTypeOptions.All,
 			allowsEditing: true,
-			aspect: [4, 3],
+			aspect: [3, 3],
 			quality: 1,
 		});
 
@@ -54,19 +52,20 @@ export default function Screen7({ navigation }) {
 
 	return (
 		<View style={styles.Screen}>
-			<TextInput
-				style={styles.TextInput2}
-				placeholder={"Ürün Adı"}
-				value={name}
-				onChangeText={(text) => setName(text)}
-			></TextInput>
-			<TextInput
-				style={styles.TextInput2}
-				placeholder={"Açıklaması"}
-				value={about}
-				onChangeText={(text) => setAbout(text)}
-			></TextInput>
-
+			<View style={{ marginTop: "10%" }}>
+				<TextInput
+					style={styles.TextInput2}
+					placeholder={"Ürün Adı"}
+					value={name}
+					onChangeText={(text) => setName(text)}
+				></TextInput>
+				<TextInput
+					style={styles.TextInput2}
+					placeholder={"Açıklaması"}
+					value={about}
+					onChangeText={(text) => setAbout(text)}
+				></TextInput>
+			</View>
 			<View
 				style={{
 					alignItems: "center",
