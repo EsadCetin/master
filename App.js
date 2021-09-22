@@ -37,11 +37,6 @@ export default function App() {
 			<NavigationContainer>
 				<Stack.Navigator initialRouteName="Login">
 					<Stack.Screen
-						options={{ headerTitleAlign: "center" }}
-						name="Esadke"
-						component={Screen11}
-					/>
-					<Stack.Screen
 						name="Giriş Ekranı"
 						options={{ headerShown: false }}
 						component={SignUpScreen}
@@ -90,6 +85,11 @@ export default function App() {
 						name="Tenth Screen"
 						options={{ headerShown: false }}
 						component={Screen10}
+					/>
+					<Stack.Screen
+						options={{ headerTitleAlign: "center" }}
+						name="Esadke"
+						component={Screen11}
 					/>
 				</Stack.Navigator>
 			</NavigationContainer>

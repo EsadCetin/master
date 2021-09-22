@@ -54,7 +54,7 @@ export default function Screen11({ navigation }) {
 		<FlatList
 			style={styles.Screen}
 			data={products}
-			renderItem={({ product }) => (
+			renderItem={({}) => (
 				<View>
 					<TouchableOpacity
 						onPress={() => navigation.navigate("Eighth Screen")}
