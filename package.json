@@ -11,7 +11,7 @@
 		"@expo-google-fonts/dev": "^0.2.0",
 		"@react-navigation/native": "^6.0.2",
 		"@react-navigation/native-stack": "^6.1.0",
-		"expo": "~42.0.1",
+		"expo": "^42.0.4",
 		"expo-app-loading": "^1.1.2",
 		"expo-av": "~9.2.3",
 		"expo-font": "^9.2.1",
