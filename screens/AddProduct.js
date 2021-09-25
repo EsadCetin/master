@@ -46,9 +46,10 @@ export default function Screen7({ navigation }) {
 				productPhotoUrl: image,
 				productAdderAuthID: auth?.currentUser?.uid,
 				productPrice: price,
+				products: [],
 			})
 			.catch((error) => alert(error));
-		navigation.navigate("Eighth Screen");
+		navigation.navigate("Esadke");
 	};
 
 	return (

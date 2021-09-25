@@ -1,85 +1,55 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
+import { Modal } from "react-native";
 import { View, Text, Image, TouchableOpacity } from "react-native";
 import { auth, db } from "../firebase";
 import styles from "./styles";
-import { Audio } from "expo-av";
-function Screen8({ navigation }) {
-	const [name, setName] = useState("");
-	const [image, setImage] = useState();
-	const [about, setAbout] = useState("");
-	const [sound, setSound] = React.useState();
 
-	async function playSound() {
-		const { sound } = await Audio.Sound.createAsync(
-			require("../assets/sevgim-yilmaz-bile-bile-yandi-yuregim.mp3")
-		);
-		setSound(sound);
-
-		await sound.playAsync();
-	}
-
-	React.useEffect(() => {
-		return sound
-			? () => {
-					sound.unloadAsync();
-			  }
-			: undefined;
-	}, [sound]);
+function Screen8({ navigation, route }) {
+	const [modalVisible, setModalVisible] = useState(false);
+	const { name, image, about, key, sellerID } = route.params.item;
 	const deleteProduct = async () => {
-		await db.collection("products").doc(auth?.currentUser?.uid).delete();
-		sound.unloadAsync();
+		await db.collection("products").doc(key).delete();
 		navigation.navigate("Ninth Screen");
 	};
 
-	const getProduct = async () => {
-		await db
-			.collection("products")
-			.doc()
-			.get()
-			.then(function (doc) {
-				if (doc.exists) {
-					setName(doc.get("productName"));
-					setImage(doc.get("productPhotoUrl"));
-					setAbout(doc.get("productAbout"));
-				}
-			})
-			.catch(function (error) {
-				console.log("Error getting document:", error);
-			});
+	const showButton = () => {
+		if (auth?.currentUser?.uid === sellerID) {
+			console.log("eşit");
+		}
 	};
-	getProduct();
-
+	showButton();
 	return (
 		<View style={styles.Screen}>
-			<View style={styles.ProductButtons}>
+			<Modal transparent={true} visible={modalVisible}>
+				<View style={styles.ProductButtons}>
+					<TouchableOpacity
+						style={styles.UpdateButton}
+						onPress={() => navigation.push("Tenth Screen")}
+					>
+						<Text style={styles.Update}>Güncelle</Text>
+					</TouchableOpacity>
+					<TouchableOpacity style={styles.DeleteButton} onPress={deleteProduct}>
+						<Text style={styles.Delete}>Sil</Text>
+					</TouchableOpacity>
+				</View>
+			</Modal>
+
+			<View style={{ marginTop: "25%" }}>
+				<Text style={styles.ProductName}>{name}</Text>
+				<Image
+					style={styles.Photo}
+					source={{
+						uri: image,
+					}}
+				/>
+				<Text style={styles.ProductName}>{about}</Text>
 				<TouchableOpacity
-					style={styles.UpdateButton}
-					onPress={() => navigation.push("Tenth Screen")}
+					style={styles.ProductsButton}
+					onPress={() => navigation.push("Esadke")}
 				>
-					<Text style={styles.Update}>Güncelle</Text>
-				</TouchableOpacity>
-				<TouchableOpacity
-					style={styles.DeleteButton}
-					onPressIn={() => playSound()}
-					onPressOut={deleteProduct}
-				>
-					<Text style={styles.Delete}>Sil</Text>
+					<Text style={styles.Update}>Ürünler</Text>
 				</TouchableOpacity>
 			</View>
-			<Text style={styles.ProductName}>{name}</Text>
-			<Image
-				style={styles.Photo}
-				source={{
-					uri: image,
-				}}
-			/>
-			<Text style={styles.ProductName}>{about}</Text>
-			<TouchableOpacity
-				style={styles.ProductsButton}
-				onPress={() => navigation.push("Esadke")}
-			>
-				<Text style={styles.Update}>Ürünler</Text>
-			</TouchableOpacity>
 		</View>
 	);
 }

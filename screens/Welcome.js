@@ -6,7 +6,7 @@ import styles from "./styles";
 function Screen6({ navigation }) {
 	const [image, setImage] = useState();
 	const [sellerName, setSellerName] = useState("");
-	const getUserImage = async () => {
+	const getUser = async () => {
 		await db
 			.collection("users")
 			.doc(auth?.currentUser?.uid)
@@ -18,7 +18,7 @@ function Screen6({ navigation }) {
 				}
 			});
 	};
-	getUserImage();
+	getUser();
 
 	return (
 		<View style={styles.Screen}>

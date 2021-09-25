@@ -247,7 +247,7 @@ export default StyleSheet.create({
 	ProductButtons: {
 		flexDirection: "row",
 		justifyContent: "space-between",
-		marginTop: "15%",
+		marginTop: "5%",
 		marginRight: "5%",
 		marginLeft: "5%",
 	},
